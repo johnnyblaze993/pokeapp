@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.mons
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, data, data-jdbc, gradle, http-client, jackson-databind, java, java-application, jdbc-hikari, junit, logback, micronaut-aot, micronaut-build, micronaut-http-validation, micronaut-test-rest-assured, mockito, netty-server, postgres, reactor, reactor-http-client, readme, security-annotations, security-jwt, shade, test-resources, yaml, yaml-build]
