@@ -3,6 +3,7 @@ package com.mons.entities;
 import java.util.List;
 
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.data.annotation.Transient;
@@ -11,6 +12,7 @@ import io.micronaut.data.annotation.Transient;
 @MappedEntity("pokemon") // maps to the "pokemon" table in your database
 public class Pokemon {
     @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private Integer baseExperience;
@@ -21,6 +23,11 @@ public class Pokemon {
     private List<Types> types;
 
     // Constructors
+    public Pokemon() {
+        // Initialize the baseExperience with a default value, such as 0.
+        this.baseExperience = 0;
+    }
+
     public Pokemon(Integer id, String name, Integer baseExperience, Integer height, Integer weight) {
         this.id = id;
         this.name = name;
@@ -76,9 +83,6 @@ public class Pokemon {
 
     public void setTypes(List<Types> types) {
         this.types = types;
-    }
-
-    public Pokemon() {
     }
 
 }

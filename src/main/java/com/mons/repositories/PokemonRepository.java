@@ -7,5 +7,4 @@ import com.mons.entities.Pokemon;
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
 public interface PokemonRepository extends CrudRepository<Pokemon, Integer> {
-    // Your methods here, if needed
 }
