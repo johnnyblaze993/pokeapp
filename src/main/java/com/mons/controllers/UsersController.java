@@ -5,12 +5,13 @@ import com.mons.repositories.UsersRepository;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
-import io.micronaut.security.annotation.Secured;
-import io.micronaut.security.rules.SecurityRule;
 import jakarta.inject.Inject;
 
-@Controller("/users")
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
+
 @Secured(SecurityRule.IS_ANONYMOUS)
+@Controller("/users")
 public class UsersController {
 
     @Inject
