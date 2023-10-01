@@ -1,29 +1,22 @@
 package com.mons.dto;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class PokemonDTO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class DetailedPokemonResponse {
     private String name;
-    private List<String> types; // Assuming the types are just a list of names
     private Integer height;
     private Integer weight;
     private Integer baseExperience;
+    // ... potentially other fields
 
-    // Getters and setters
+    // Getters and Setters
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<String> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<String> types) {
-        this.types = types;
     }
 
     public Integer getHeight() {

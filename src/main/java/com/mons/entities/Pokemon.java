@@ -25,7 +25,7 @@ public class Pokemon {
     // Constructors
     public Pokemon() {
         // Initialize the baseExperience with a default value, such as 0.
-        this.baseExperience = 0;
+        // this.baseExperience = 0;
     }
 
     public Pokemon(Integer id, String name, Integer baseExperience, Integer height, Integer weight) {

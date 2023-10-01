@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mons.client.PokeApiClient;
+import com.mons.dto.DetailedPokemonResponse;
 import com.mons.dto.PokemonDTO;
 import com.mons.dto.PokemonResponse;
 import com.mons.entities.Pokemon;
@@ -20,6 +21,8 @@ import org.slf4j.LoggerFactory;
 
 @Singleton
 public class PokemonService {
+
+    private static final Logger logger = LoggerFactory.getLogger(PokemonService.class);
 
     @Inject
     private final PokeApiClient pokeApiClient;
@@ -36,17 +39,29 @@ public class PokemonService {
     public void fetchAndStorePokemon() {
         PokemonResponse response = pokeApiClient.getPokemon();
         for (PokemonResponse.PokemonResource resource : response.getResults()) {
-            PokemonDTO pokemonDTO = new PokemonDTO();
-            pokemonDTO.setName(resource.getName());
-            // populate the types or any other info you want
-            addPokemon(pokemonDTO);
+            // Fetch detailed info for each Pokemon by using the URL or the name
+            DetailedPokemonResponse detailedPokemon = pokeApiClient.getDetailedPokemon(resource.getName());
+
+            if (detailedPokemon != null) {
+                PokemonDTO pokemonDTO = new PokemonDTO();
+                pokemonDTO.setName(detailedPokemon.getName());
+                pokemonDTO.setHeight(detailedPokemon.getHeight());
+                pokemonDTO.setWeight(detailedPokemon.getWeight());
+                pokemonDTO.setBaseExperience(detailedPokemon.getBaseExperience());
+                // ... potentially other fields
+                addPokemon(pokemonDTO);
+            } else {
+                logger.error("Error fetching detailed info for Pokemon with name: " + resource.getName());
+            }
         }
     }
 
     public void addPokemon(PokemonDTO pokemonDTO) {
         Pokemon pokemon = new Pokemon();
         pokemon.setName(pokemonDTO.getName());
-        // ... set other fields like height, weight, base_experience, etc.
+        pokemon.setHeight(pokemonDTO.getHeight());
+        pokemon.setWeight(pokemonDTO.getWeight());
+        pokemon.setBaseExperience(pokemonDTO.getBaseExperience());
 
         List<Types> typeEntities = Optional.ofNullable(pokemonDTO.getTypes())
                 .orElse(Collections.emptyList())
