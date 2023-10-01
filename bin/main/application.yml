@@ -8,10 +8,10 @@ micronaut:
         signatures:
           secret:
             generator:
-              secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
+              secret: articunozapdosmoltres
 datasources:
   default:
-    driver-class-name: org.postgresql.Driver
-    db-type: postgres
-    schema-generate: CREATE_DROP
-    dialect: POSTGRES
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=pokemons
+    username: postgres
+    password: mysecretpassword
+    driverClassName: org.postgresql.Driver
