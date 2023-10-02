@@ -75,6 +75,7 @@ public class PokemonService {
         pokemonRepository.save(pokemon);
     }
 
+    // TODO - Implement this method
     private Types findOrCreateType(String typeName) {
         Optional<Types> existingType = typesRepository.findByName(typeName);
         return existingType.orElseGet(() -> {
